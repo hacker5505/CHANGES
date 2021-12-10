@@ -1,0 +1,69 @@
+{% extends 'index.html' %} {% load static %} {% load bootstrap4 %} {% block
+title %} Login  {% block main %}
+<!-- Login -->
+<div class="bg-white">
+  <div class="container">
+    <div class="row justify-content-center align-items-center d-flex vh-100">
+      <div class="col-lg-4 mx-auto">
+        <div class="osahan-login py-4">
+          <div class="text-center mb-4">
+            <a href="index.html"><img src="images/fav.svg" alt="" /></a>
+            <h5 class="font-weight-bold mt-3">Bienvenido a Tuasella</h5>
+            <p class="text-muted">
+              No pierdas esta oportunidad. Registrate para encontrar una oferta que te convenza.
+            </p>
+          </div>
+
+          {% for error in form.non_field_errors %}
+          <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+          </div>
+          {% endfor %}
+
+          <form action="" method="POST" novalidate>
+            {% csrf_token %}
+
+            <div class="form-group">
+              <label class="mb-1">Correo</label>
+              <span class="text-danger">*</span>
+              <span class="text-danger"
+                >{{form.username.errors|striptags }}</span
+              >
+              <div class="position-relative icon-form-control">
+                <i class="mdi mdi-account position-absolute"></i>
+                {{ form.username }}
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="mb-1">Contraseña</label>
+              <span class="text-danger">*</span>
+              <span class="text-danger"
+                >{{form.password.errors|striptags }}</span
+              >
+              <div class="position-relative icon-form-control">
+                <i class="mdi mdi-key-variant position-absolute"></i>
+                {{ form.password }}
+              </div>
+            </div>
+            <button
+              class="btn btn-success btn-block text-uppercase"
+              type="submit"
+            >
+              Iniciar Sesión
+            </button>
+            <div class="py-3 d-flex align-item-center">
+              <a href="{% url 'password_reset' %}">Olvidaste tu contraseña?</a>
+              <span class="ml-auto">
+                Nuevo en Tuasella?
+                <a href="{% url 'users:signup' %}">Registrate ahora</a></span
+              >
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- End Login -->
+{% endblock main %}

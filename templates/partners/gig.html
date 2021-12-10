@@ -1,0 +1,203 @@
+{% extends 'seller_index.html' %}
+{% load static %}
+
+{% block title %} {{ user_profile.user_name }} / gigs{% endblock title %}
+
+{% block main %}
+
+<div class="main-page second py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
+                    <h2 class="mb-0 p-0">Gigs</h2>
+                    <a class="btn btn-sm btn-success ml-auto" href="{% url 'gigs:over_view' %}">Create a new gig</a>
+                </div>
+                <ul class="nav osahan-tabs nav-tabs flex-column flex-sm-row ">
+                    <li class="nav-item">
+                        <a href="#active" data-toggle="tab" class="nav-link make-black active">
+                            Active
+                            <span class="badge badge-success">
+                                {{ active_gigs|length }}
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#delivered" data-toggle="tab" class="nav-link make-black">
+                            REQUIRES MODIFICATION
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#draft" data-toggle="tab" class="nav-link make-black">
+                            DRAFT
+                            <span class="badge badge-success">
+                                {{ draft_gigs|length }}
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#cancelled" data-toggle="tab" class="nav-link make-black">
+                            DENIED
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content osahan-table bg-white rounded shadow-sm px-3 pt-1">
+                    <div class="tab-pane active" id="active">
+                        <div class="table-responsive box-table mt-3">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Gig</th>
+                                        <th>Orders</th>
+                                        <th>Cancellations</th>
+                                        <th>Edit</th>
+                                    </tr>
+                                </thead>
+
+                                {% if not active_gigs %}
+                                <h6>There are no active gigs to show.</h6>
+                                {% endif %}
+
+                                <tbody>
+
+                                    {% for i in active_gigs %}
+                                    <tr>
+                                        <td>
+                                            <!-- <a href="#" class="make-black"> -->
+                                            <img class="order-proposal-image" src="{{ i.media.main_image.url }}">
+                                            <p class="order-proposal-title">{{ i.over_view.title }}</p>
+                                            <!-- </a> -->
+                                        </td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>
+                                            <div class="btn-group dropleft">
+                                                <button type="button" class="btn btn-secondary dropdown-toggle"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item"
+                                                        href="{% url 'gigs:edit_gig' i.id %}">Edit</a>
+                                                    <a class="dropdown-item"
+                                                        href="{% url 'gigs:delete_gig' i.id %}">Delete</a>
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="delivered">
+                        <div class="table-responsive box-table mt-3">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Gig</th>
+                                        <th>Orders</th>
+                                        <th>Cancellations</th>
+                                        <th>Edit</th>
+                                    </tr>
+                                </thead>
+                                <h6>There are no gigs which require modifications to show.</h6>
+                                <tbody>
+                                    <tr>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="draft">
+                        <div class="table-responsive box-table mt-3">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Gig</th>
+                                        <th>Orders</th>
+                                        <th>Cancellations</th>
+                                        <th>Edit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    {% for i in draft_gigs %}
+                                    <tr>
+                                        <td>
+                                            <!-- <a href="#" class="make-black"> -->
+                                            <img class="order-proposal-image" src="{{ i.media.main_image.url }}">
+                                            <p class="order-proposal-title">{{ i.over_view.title }}</p>
+                                            <!-- </a> -->
+                                        </td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>
+                                            <div class="btn-group dropleft">
+                                                <button type="button" class="btn btn-secondary dropdown-toggle"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item"
+                                                        href="{% url 'gigs:continue_gig' i.id %}">Continue</a>
+                                                    <a class="dropdown-item"
+                                                        href="{% url 'gigs:delete_gig' i.id %}">Delete</a>
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="cancelled">
+                        <div class="table-responsive box-table mt-3">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Gig</th>
+                                        <th>Orders</th>
+                                        <th>Cancellations</th>
+                                        <th>Edit</th>
+                                    </tr>
+                                </thead>
+                                <h6>There are no cancelled gigs to show.</h6>
+                                <tbody>
+                                    <tr>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- <div class="tab-pane" id="all">
+                        <div class="table-responsive box-table mt-3">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Gig</th>
+                                        <th>Orders</th>
+                                        <th>Cancellations</th>
+                                        <th>Edit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock main %}

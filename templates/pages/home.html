@@ -1,0 +1,173 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %} Home {% endblock title %}
+
+{% block main %}
+
+{% if user_profile.seller == True and user_profile.reject == True %}
+<div class="alert alert-danger alert_center" role="alert">
+    There are some errors in the form. Please goto 'Become A Parter'.
+</div>
+{% endif %}
+
+{% if user_profile.seller == True and user_profile.reject == None %}
+<div class="alert alert-warning alert_center" role="alert">
+    Please wait your request is under review.
+</div>
+{% endif %}
+
+<section class="py-5 homepage-search-block text-center homepage-search-block-2 bg-dark position-relative">
+    <div class="container">
+        <div class="row py-lg-5">
+            <div class="col-lg-8 mx-auto">
+                <div class="homepage-search-title">
+                    <h1 class="mb-3 text-shadow text-white font-weight-bold">Encuentra al partner ideal
+                        </h1>
+                    <h5 class="mb-5 text-shadow text-white-50 font-weight-normal">Dejanos en nuestras manos tus deberes.
+                </div>
+                <div class="homepage-search-form">
+                    <div class="form-noborder">
+                        <div class="form-row justify-content-center">
+                            <div class="col-lg-7 col-md-7 col-sm-12 form-group">
+                                <input id="search" type="text" placeholder="Find Services..."
+                                    class="form-control border-0 form-control-lg shadow-sm">
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-12 form-group">
+                                <button onclick="search_form()" type="button"
+                                    class="btn btn-success btn-block btn-lg btn-gradient shadow-sm"><i
+                                        class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="popular">
+                    <ul class="search-category" style="align-items: center !important;">
+
+                        {% for i in categories %}
+                        <li class="center-li" style="cursor: pointer;"><a id="{{ i }}" class="text-body-2">
+                                {{ i }} </a></li>
+                        {% endfor %}
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- about section -->
+<div class="container">
+    <div class="about-section py-5">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h2>Cumple con tus trabajos usando Tuasella.
+                     <br>Confía en nosotros
+                </h2>
+                <ul>
+                    <li><span><img src="images/checkmark.svg"> Protección de pago garantizada</span>
+                        Tu pago es protegido hasta que hayas recibido y satisfecho el trabajo.
+                    </li>
+                    <li><span><img src="images/checkmark.svg"> Conoce el precio que pagaras
+                        </span>Encuentra tu servicio de preferencia en minutos y conoce el precio que pagaras al momento.
+
+                    </li>
+                    <li><span><img src="images/checkmark.svg"> Estamos para ti </span>Tuasella
+                        está para ti. Contestamos cualquier pregunta o duda que tengas acerca de nuestros servicios. No dudes en resolver todas tus dudas con tu partner de preferencia.
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <img src="images/video.svg" class="video-img w-100">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- about section -->
+<div class="market-wrapper py-5 bg-white">
+    <div class="container">
+        <h2 class="text-center">Explora el Marketplace</h2>
+        <ul class="categories-list mb-0">
+
+            <li>
+                <a href="#">
+                    <img src="images/online-marketing.svg" alt="Digital Marketing" loading="lazy">Matemáticas y Ciencias Exactas
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="images/writing-translation.svg" alt="Writing &amp; Translation" loading="lazy">Lenguas & Redacción
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="images/video-animation.svg" alt="Video &amp; Animation" loading="lazy">Medicina
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="images/music-audio.svg" alt="Music &amp; Audio" loading="lazy">Ciencias de la Computación</a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="images/programming.svg" alt="Programming &amp; Tech" loading="lazy">Diseño gráfico
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="images/business.svg" alt="Business" loading="lazy">Humanidades & Ciencias Sociales</a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="images/lifestyle.svg" alt="Lifestyle" loading="lazy">Medicina
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- market -->
+<!-- testimonials -->
+<div class="testi-wrap py-5 border-top border-bottom">
+    <div class="container">
+        <div class="testimonial">
+            <div class="video-modal">
+                <div class="picture-wrapper">
+                    <img src="images/1440-haerfest-2x.jpg">
+                </div>
+            </div>
+            <div class="text-content">
+                <p>"Tuasella es una pequeña empresa de servicios educativos que busca ser el referente en el mercado educativo de internet, siendo una empresa ejemplar en el
+                   trato digno al cliente. Tuasella se distingue por ser una empresa que ofrece una diversidad de partners que mejor puedan satisfacer la necesidad del cliente
+                   por buscar calidad y precio en el servicio".
+                </p>
+                <span></span>
+                <img alt="Company logo" src="images/haerfest-logo.png" loading="lazy">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- testimonials -->
+
+{% block javascript %}
+<script>
+    function search_form() {
+        let search_input = $('#search').val()
+        if ($.trim(search_input) != '') {
+            $(`<form method="POST" action="{% url 'gigs:gigs' %}">{% csrf_token %} <input type="text" name="search" value="${search_input}"> </form>`)
+                .appendTo("body").submit();
+        }
+    }
+
+    document.getElementById('search').onkeydown = function (e) {
+        if (e.keyCode == 13) {
+            search_form()
+        }
+    };
+
+    $('ul.search-category li').unbind("click").click(function (e) {
+        $(`<form method="POST" action="{% url 'gigs:gigs' %}">{% csrf_token %} <input type="text" name="search" value="${e.target.id}"> </form>`)
+            .appendTo("body").submit();
+    });
+</script>
+{% endblock javascript %}
+
+{% endblock main %}

@@ -1,0 +1,307 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block main %}
+
+{% if user_profile.seller == True and user_profile.reject == True %}
+<div class="alert alert-danger alert_center" role="alert">
+    {{user_profile.admin_message}}
+</div>
+{% endif %}
+
+{% if user_profile.seller == True and user_profile.reject == None %}
+<div class="alert alert-warning alert_center" role="alert">
+    Por favor, espera tu solicitud, está en revisión.
+</div>
+
+{% else %}
+<form action="{% url 'partners:partner_create' %}" method="POST" novalidate enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="py-5">
+        <div class="container">
+            <div class="row">
+
+                <!-- Main Content -->
+                <aside class="col-md-4">
+                    <div class="shadow-sm rounded bg-white mb-3">
+                        <div class="box-title border-bottom p-3">
+                            <h6 class="m-0">Acerca</h6>
+                            <p class="mb-0 mt-0 small">Cuentanos acerca de ti en dos oraciones.
+                            </p>
+                        </div>
+                        <div class="box-body">
+                            <div class="p-3">
+                                <div class="form-group mb-4">
+                                    <label class="mb-1">Biografía</label>
+                                    <span class="text-danger">{{ partner_form.bio.errors|striptags }}</span>
+                                    <div class="position-relative">
+                                        {{ partner_form.bio }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <main class="col-md-8">
+                    <div class="shadow-sm rounded bg-white mb-3">
+                        <div class="box-title border-bottom p-3">
+                            <h6 class="m-0">Introduce la información básica</h6>
+                        </div>
+                        <div class="box-body p-3">
+                            <div class="row">
+
+                                <div class="col-sm-6 mb-2">
+                                    <div>
+                                        <label id="emailLabel" class="form-label">
+                                            Dirección de Correo
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <span class="text-danger"> {{ user_form.email.errors|striptags }} </span>
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" name="email" readonly
+                                                value="{{request.user.email}}" placeholder="Enter your email address">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mb-2">
+                                    <div>
+                                        <label id="usernameLabel" class="form-label">
+                                            Usuario
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <input type="email" class="form-control" name="email" readonly
+                                                    value="{{ user_profile.user_name }}"
+                                                    placeholder="Enter your email address">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-sm-6 mb-2">
+                                    <div>
+                                        <label id="nameLabel" class="form-label">
+                                            Nombre
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <span class="text-danger"> {{ partner_form.first_name.errors|striptags }}
+                                        </span>
+                                        <div class="form-group">
+                                            {{ partner_form.first_name }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mb-2">
+                                    <div>
+                                        <label id="usernameLabel" class="form-label">
+                                            Apellidos
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <span class="text-danger"> {{ partner_form.last_name.errors|striptags }} </span>
+                                        <div class="form-group">
+                                            {{ partner_form.last_name }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-6 mb-3 mb-sm-6">
+                                    <div>
+                                        <label class="form-label">
+                                            Fecha de nacimiento
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <span class="text-danger"> {{ partner_form.birth_date.errors|striptags }}
+                                        </span>
+                                        <div class="form-group">
+                                            {{ partner_form.birth_date }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 mb-3 mb-sm-6">
+                                    <div>
+                                        <label class="form-label">
+                                            Genero
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <span class="text-danger">{{ partner_form.gender.errors|striptags }}</span>
+                                        <div class="form-group">
+                                            {{ partner_form.gender }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-sm-6 mb-2">
+                                    <div>
+                                        <label class="form-label">
+                                            Lengua de preferencia
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <span class="text-danger">{{ partner_form.language.errors|striptags }}</span>
+                                        <div class="form-group">
+                                            {{ partner_form.language }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mb-2">
+                                    <div>
+                                        <label id="locationLabel" class="form-label">
+                                            Locación
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <span class="text-danger">{{ partner_form.address.errors|striptags }}</span>
+                                        <div class="form-group">
+                                            {{ partner_form.address }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-sm-6 mb-2">
+                                    <div>
+                                        <label id="organizationLabel" class="form-label">
+                                            Organización
+                                        </label>
+                                        <span class="text-danger"> {{ partner_form.organization.errors|striptags }}
+                                        </span>
+                                        <div class="form-group">
+                                            {{ partner_form.organization }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mb-2">
+                                    <div>
+                                        <label id="phoneNumberLabel" class="form-label">
+                                            Número de teléfono
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <span class="text-danger"> {{ partner_form.phone_number.errors|striptags }}
+                                        </span>
+                                        <div class="form-group">
+                                            {{ partner_form.phone_number }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="shadow-sm rounded bg-white mb-3">
+                        <div class="box-title border-bottom p-3">
+                            <h6 class="m-0">Identificación
+                            </h6>
+                            <p class="mb-0 mt-0 small"> Provéenos fotografías (nítidas) de tu identificación nacional o licencia de manejo. De la parte frontal y de la parte trasera.
+
+                            </p>
+                            <p class="text-danger">
+                                Todas las fotos deben de ser nítidas*
+                            </p>
+                        </div>
+                        <div class="box-body px-3 pt-3 pb-0">
+                            <div class="row">
+
+                                <div class="col-sm-6 mb-4">
+                                    <label id="FROM" class="form-label">ID parte frontal</label>
+                                    <span class="text-danger">*</span>
+                                    <span class="text-danger">{{ partner_form.id_card_front.errors|striptags }}</span>
+                                    <div class="input-group">
+                                        {{ partner_form.id_card_front }}
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mb-4">
+                                    <label id="TO" class="form-label">ID parte trasera</label>
+                                    <span class="text-danger">*</span>
+                                    <span class="text-danger">{{ partner_form.id_card_back.errors|striptags }}</span>
+                                    <div class="input-group">
+                                        {{ partner_form.id_card_back }}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="shadow-sm rounded bg-white mb-3">
+                        <div class="box-title border-bottom p-3">
+                            <h6 class="m-0">Categoría de educación y servicio
+                            </h6>
+                            <p class="mb-0 mt-0 small">Provéenos de tu formación educativa relacionado con los servicios que ofreces. De igual forma, sube una fotografía o documento del grado académico o certificado que comprueben tu formación académica. Solamente se aceptan de eduación media superior (bachillerato) o superior (universidad).
+                            </p>
+                            <p class="text-danger">
+                                Todas las fotografías o documentos deben ser nítidos*
+                            </p>
+                        </div>
+                        <div class="box-body px-3 pt-3 pb-0">
+                            <div class="row">
+
+                                <div class="col-12  mb-4">
+                                    <label id="FROM" class="form-label">Service category</label>
+                                    <span class="text-danger">*</span>
+                                    <span class="text-danger">{{ partner_form.category.errors|striptags }}</span>
+                                    <div class="input-group">
+                                        {{ partner_form.category }}
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6 mb-4">
+                                    <label id="companyLabel" class="form-label">Grado académico o nombre del certificado que represente el nivel cursado</label>
+                                    <span class="text-danger">*</span>
+                                    <span class="text-danger">{{ partner_form.degree.errors|striptags }}</span>
+                                    <div class="input-group">
+                                        {{ partner_form.degree }}
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 mb-4">
+                                    <label id="positionLabel" class="form-label">Degree or certificate image</label>
+                                    <span class="text-danger">*</span>
+                                    <span class="text-danger">{{ partner_form.degree_image.errors|striptags }}</span>
+                                    <div class="input-group">
+                                        {{ partner_form.degree_image }}
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="mb-3 text-right">
+                        <button type="submit" class="btn btn-outline-success">Cancelar</button>
+                        <button type="submit" class="btn btn-success">Proceder</button>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+</form>
+{% endif %}
+
+{% endblock main %}

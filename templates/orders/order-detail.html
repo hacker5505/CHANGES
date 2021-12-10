@@ -1,0 +1,106 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %} order-detail {% endblock title %}
+
+{% block head %}
+
+{% endblock head %}
+
+{% block main %}
+
+<section class="py-4">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="bg-white rounded shadow-sm sidebar-page-right c">
+                    <div>
+                        <div class="p-3 border-bottom">
+                            {% include 'orders/progress-bar.html' %}
+                        </div>
+                        <div class="p-3 border-bottom">
+                            <form action="{% url 'orders:order_payment' gig.id %}" method="POST" class="design-form"
+                                enctype="multipart/form-data" novalidate>
+                                {% csrf_token %}
+                                <h5>{{ gig.over_view.title }}</h5>
+                                <div class="row d-flex align-items-center form-group mt-3">
+                                    <div class="col-md-6">
+                                        <div class="card" style="width: 100%;">
+                                            <div class="card-header">
+                                                Price Summary
+                                            </div>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">
+                                                    <div class="row align-items-center">
+                                                        <p class="col-md-4">
+                                                            Subtotal
+                                                        </p>
+                                                        <p class="col-md-8 text-right">
+                                                            $ {{ gig.pricing.price }}
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <div class="row align-items-center">
+                                                        <p class="col-md-4">
+                                                            Service Fee
+                                                        </p>
+                                                        <p class="col-md-8 text-right">
+                                                            $ {{ service_fee }}
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <div class="row align-items-center">
+                                                        <p class="col-md-4">
+                                                            Deliver Days
+                                                        </p>
+                                                        <p class="col-md-8 text-right">
+                                                            {{ gig.pricing.delivery_time }} days
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <div class="row align-items-center">
+                                                        <p class="col-md-4">
+                                                            Total
+                                                        </p>
+                                                        <p class="col-md-8 text-right">
+                                                            $ {{ total }}
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <button class="btn btn-success" id="checkout-button"
+                                                        type="submit">Continue to Checkout</button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <img class="img-fluid img-large" src="{{ gig.media.main_image.url }}"
+                                            alt="Card image cap">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% block javascript %}
+
+
+<script>
+
+    window.onload = function () {
+        $('#over-view').addClass('form-progress-bar')
+    }
+
+</script>
+{% endblock javascript %}
+
+{% endblock main %}

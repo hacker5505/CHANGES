@@ -1,0 +1,63 @@
+<!-- footer -->
+<footer class="bg-white">
+  <div class="container">
+    <div class="d-flex justify-content-between">
+      <div class="footer-list">
+        <h2>Categories</h2>
+        <ul class="search-category list">
+          {% for i in categories %}
+          <li style="cursor: pointer">
+            <a id="{{ i }}"> {{ i }} </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="footer-list">
+        <h2>About</h2>
+        <ul class="list">
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press &amp; News</a></li>
+          <li><a href="#">Partnerships</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Intellectual Property Claims</a></li>
+          <li><a href="#" target="_blank">Investor Relations</a></li>
+        </ul>
+      </div>
+      <div class="footer-list">
+        <h2>Support</h2>
+        <ul class="list">
+          <li><a href="#">Help &amp; Support</a></li>
+          <li><a href="#">Trust &amp; Safety</a></li>
+          <li><a href="#">Selling on Miver </a></li>
+          <li><a href="#">Buying on Miver </a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      <div class="logo">
+        <a href="index.html">
+          <img src="images/logo.svg" />
+        </a>
+      </div>
+      <p>© Copyright 2022 Miver. All Rights Reserved</p>
+      <ul class="social">
+        <li>
+          <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+        </li>
+        <li>
+          <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+        </li>
+        <li>
+          <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+        </li>
+        <li>
+          <a href="#"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a>
+        </li>
+        <li>
+          <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>

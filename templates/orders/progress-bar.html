@@ -1,0 +1,17 @@
+<ul class="nav osahan-tabs  flex-column flex-sm-row" style="cursor:default;">
+    <li class="nav-item">
+        <a class="nav-link" id="over-view" href="{% url 'orders:order_detail' gig.id %}">
+            Oder Details
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pricing" href="{% url 'orders:order_payment' gig.id %}">
+            Confirm & Pay
+        </a>
+    </li>
+    <li class=" nav-item">
+        <a class="nav-link" id="description">
+            Description
+        </a>
+    </li>
+</ul>

@@ -1,0 +1,220 @@
+{% extends 'index.html' %} 
+{% load static %} 
+{% block title %} gigs {% endblock title %} 
+
+{% block main %}
+<section class="py-5 p-list-two">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="filters shadow-sm rounded bg-white mb-4">
+          <div class="filters-header border-bottom pl-4 pr-4 pt-3 pb-3">
+            <h5 class="m-0">Filter By</h5>
+          </div>
+          <div class="filters-body">
+            <div id="accordion">
+              <div class="filters-card border-bottom p-4">
+                <div class="filters-card-header" id="headingTwo">
+                  <h6 class="mb-0">
+                    <a
+                      href="#"
+                      class="btn-link"
+                      data-toggle="collapse"
+                      data-target="#collapsetwo"
+                      aria-expanded="true"
+                      aria-controls="collapsetwo"
+                    >
+                      Categories
+                      <i class="mdi mdi-chevron-down float-right"></i>
+                    </a>
+                  </h6>
+                </div>
+                <div
+                  id="collapsetwo"
+                  class="collapse show"
+                  aria-labelledby="headingTwo"
+                  data-parent="#accordion"
+                >
+                  <div class="filters-card-body card-shop-filters">
+                    <div class="gigs-page-categories">
+                      <ul class="search-category">
+                        {% for i in tags %}
+                        <li><a id="{{ i }}"> {{ i }} </a></li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="filters-card border-bottom p-4">
+                <div class="filters-card-header" id="headingCategory">
+                  <h6 class="mb-0">
+                    <a
+                      href="#"
+                      class="btn-link"
+                      data-toggle="collapse"
+                      data-target="#collapseCategory"
+                      aria-expanded="true"
+                      aria-controls="collapseCategory"
+                    >
+                      Budget <i class="mdi mdi-chevron-down float-right"></i>
+                    </a>
+                  </h6>
+                </div>
+                <div
+                  id="collapseCategory"
+                  class="collapse"
+                  aria-labelledby="headingCategory"
+                  data-parent="#accordion"
+                >
+                  <div class="filters-card-body card-shop-filters">
+                    <div class="gigs-page-categories">
+                      <ul class="budget-search">
+                        <li><a id="10,100"> $10 - $100 </a></li>
+                      </ul>
+                    </div>
+                    <div class="gigs-page-categories">
+                      <ul class="budget-search">
+                        <li><a id="100,500"> $100 - $500 </a></li>
+                      </ul>
+                    </div>
+                    <div class="gigs-page-categories">
+                      <ul class="budget-search">
+                        <li><a id="500,1000"> $500 - $1000 </a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- main -->
+      <div class="col-lg-9 view_slider recommended">
+        <div class="row">
+          <div class="col-lg-12">
+            <div
+              class="
+                sorting-div
+                d-flex
+                align-items-center
+                justify-content-between
+              "
+            >
+              <p class="mb-2">{{gigs|length}} Services available</p>
+              <div class="sorting d-flex align-items-center">
+                <p>Sortby</p>
+                <select
+                  class="custom-select custom-select-sm border-0 shadow-sm ml-2"
+                >
+                  <option>Best Selling</option>
+                  <option>Recommended</option>
+                  <option>Newest Arrivals</option>
+                </select>
+              </div>
+            </div>
+            <h3>Services In {{ target }}</h3>
+          </div>
+        </div>
+        <div class="row">
+          {% for i in gigs %}
+          <div class="col-md-4">
+            <a href="{% url 'gigs:gig_detail' i.id %}">
+              <img class="img-fluid" src="{{ i.media.main_image.url }}" />
+            </a>
+            <div class="inner-slider">
+              <div class="inner-wrapper">
+                <div class="d-flex align-items-center">
+                  <span class="seller-image">
+                    {% if user_profile.profile_image %}
+                    <img
+                      class="img-fluid"
+                      src="{{ user_profile.profile_image.url }}"
+                      alt=""
+                    />
+                    {% else %}
+                    <img class="img-fluid" src="" alt="" />
+                    {% endif %}
+                  </span>
+                  <span class="seller-name">
+                    <a href="{% url 'gigs:gig_detail' i.id %}">
+                      {{ user_profile.user_name|truncatechars:15 }}
+                    </a>
+                    <span class="level hint--top level-one-seller">
+                      <!-- later -->
+                    </span>
+                  </span>
+                </div>
+                <h3>
+                  <a href="{% url 'gigs:gig_detail' i.id %}">
+                    I will {{ i.over_view.title|truncatechars:50 }}
+                  </a>
+                </h3>
+                <div class="footer">
+                  <div class="price ml-auto">
+                    <a href="{% url 'gigs:gig_detail' i.id %}">
+                      Starting At <span> $ {{ i.pricing.price }}</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="footer-pagination text-center">
+          <nav class="mb-0 mt-0" aria-label="Page navigation example">
+            <ul class="pagination mb-0">
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true"
+                    ><i class="fa fa-chevron-left" aria-hidden="true"></i
+                  ></span>
+                  <!--                    <span class="sr-only"></span>-->
+                </a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item active">
+                <a class="page-link" href="#">2</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">4</a></li>
+              <li class="page-item"><a class="page-link" href="#">5</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true"
+                    ><i class="fa fa-chevron-right" aria-hidden="true"></i
+                  ></span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% block javascript %}
+<script>
+  $("ul.search-category li")
+    .unbind("click")
+    .click(function (e) {
+      $(
+        `<form method="POST" action="{% url 'gigs:gigs' %}">{% csrf_token %} <input type="text" name="search" value="${e.target.id}"> </form>`
+      )
+        .appendTo("body")
+        .submit();
+    });
+
+  $("ul.budget-search li a")
+    .unbind("click")
+    .click(function (e) {
+      $(
+        `<form method="POST" action="{% url 'gigs:gigs' %}">{% csrf_token %} <input type="text" name="budget" value="${e.target.id}"> <input type="text" name="search" value="{{ target }}"> </form>`
+      )
+        .appendTo("body")
+        .submit();
+    });
+</script>
+{% endblock javascript %} {% endblock main %}

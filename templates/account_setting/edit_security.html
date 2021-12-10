@@ -1,0 +1,81 @@
+{% extends 'seller_index.html' %}
+{% load static %}
+
+{% block title %} {{ user_profile.user_name }} / secuirity_settings {% endblock title %}
+
+{% block main %}
+
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="bg-white rounded shadow-sm py-3 sidebar-fix">
+                    <div class="dropdown-menu-show">
+                        <a class="dropdown-item py-2" href="{% url 'account_setting:edit_account' %}">Edit
+                            Account</a>
+                        <a class="dropdown-item py-2 active" href="{% url 'account_setting:edit_security' %}">Edit
+                            Security</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="bg-white rounded shadow-sm sidebar-page-right">
+                    <div>
+                        <div class="p-3 border-bottom">
+                            {% if message == True %}
+                            <div class="alert alert-success alert_center" role="alert">
+                                Your password is changed successfully.
+                            </div>
+                            {% endif %}
+                            <form action="{% url 'account_setting:edit_security' %}" method="POST" class="design-form"
+                                novalidate>
+                                {% csrf_token %}
+                                <p class="text-muted font-weight-bold">CHANGE PASSWORD</p>
+                                <div class="row d-flex align-items-center form-group">
+                                    <div class="col-md-4">
+                                        <p class="text-muted font-weight-bold mb-0">Current Password</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <span class="text-danger">
+                                            {{ password_form.old_password.errors|striptags }}
+                                        </span>
+                                        {{ password_form.old_password }}
+                                    </div>
+                                </div>
+                                <div class="row d-flex align-items-center form-group">
+                                    <div class="col-md-4">
+                                        <p class="text-muted font-weight-bold mb-0">New Password</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <span class="text-danger">
+                                            {{ password_form.new_password1.errors|striptags }}
+                                        </span>
+                                        {{ password_form.new_password1 }}
+                                    </div>
+                                </div>
+                                <div class="row d-flex align-items-center form-group">
+                                    <div class="col-md-4">
+                                        <p class="text-muted font-weight-bold mb-0">Confirm Password</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <span class="text-danger">
+                                            {{ password_form.new_password2.errors|striptags }}
+                                        </span>
+                                        {{ password_form.new_password2 }}
+                                        <p class="text-muted pt-2">8 characters or longer. Combine upper and
+                                            lowercase letters and numbers.</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <button class="btn btn-success">Save Changes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock main %}

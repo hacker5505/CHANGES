@@ -1,0 +1,365 @@
+{% extends 'seller_index.html' %}
+{% load static %}
+
+{% block title %} {{ user_profile.user_name }} / gigs / edit {% endblock title %}
+
+{% block main %}
+
+<div class="main-page second py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="nav osahan-tabs nav-tabs flex-column flex-sm-row ">
+                    <li class="nav-item">
+                        <a href="#over-view" id="over-view-a" data-toggle="tab" class="nav-link make-black">
+                            Over View
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#pricing" id="pricing-a" data-toggle="tab" class="nav-link make-black">
+                            Pricing
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#description" id="description-a" data-toggle="tab" class="nav-link make-black">
+                            Description
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#media" id="media-a" data-toggle="tab" class="nav-link make-black">
+                            Media
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="tab-content osahan-table bg-white rounded shadow-sm px-3 pt-1">
+                    <div class="tab-pane" id="over-view">
+                        <section class="py-4">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-8">
+                                        <div class="bg-white rounded shadow-sm sidebar-page-right c">
+                                            <div style="background-color: #f0f2f5;">
+                                                <div class="p-3 border-bottom">
+                                                    <form action="{% url 'gigs:edit_gig' gig_id %}" method="POST"
+                                                        class="design-form" novalidate>
+                                                        {% csrf_token %}
+                                                        <div class="row d-flex align-items-center form-group">
+                                                            <div class="col-md-4">
+                                                                <p
+                                                                    class="text-muted font-weight-bold mb-0 over-view-lable">
+                                                                    Title
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <span class="text-danger">
+                                                                    {{ over_view_form.title.errors|striptags }}
+                                                                </span>
+                                                                <div id="holder">
+                                                                    {{ over_view_form.title }}
+                                                                    <span class="before-title">I Will,</span>
+                                                                    <span id="testscrol"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row d-flex align-items-center form-group">
+                                                            <div class="col-md-4">
+                                                                <p
+                                                                    class="text-muted font-weight-bold mb-0 over-view-lable">
+                                                                    Category</p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <input type="text" name="category"
+                                                                    class="form-control font-weight-bold text-muted"
+                                                                    value="{{user_profile.category}}" readonly>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row d-flex align-items-center form-group">
+                                                            <div class="col-md-4">
+                                                                <p
+                                                                    class="text-muted font-weight-bold mb-0 over-view-lable">
+                                                                    Sub Category</p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <span class="text-danger">
+                                                                    {{ over_view_form.sub_category.errors|striptags }}
+                                                                </span>
+                                                                {{ over_view_form.sub_category }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="row d-flex align-items-center form-group">
+                                                            <div class="col-md-4">
+                                                                <p
+                                                                    class="text-muted font-weight-bold mb-0 over-view-lable">
+                                                                    Search Tags</p>
+                                                            </div>
+                                                            <div class="col-md-8" id="ttt">
+                                                                <span class="text-danger">
+                                                                    {{ over_view_form.search_tags.errors|striptags }}
+                                                                </span>
+                                                                {{ over_view_form.search_tags }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="text-right">
+                                                            <button type="submit" class="btn btn-success">Save</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="tab-pane" id="pricing">
+                        <section class="py-4">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-8">
+                                        <div class="bg-white rounded shadow-sm sidebar-page-right c">
+                                            <div style="background-color: #f0f2f5;">
+                                                <div class="p-3 border-bottom">
+                                                    <form action="{% url 'gigs:edit_gig' gig_id %}" method="POST"
+                                                        class="design-form" novalidate>
+                                                        {% csrf_token %}
+                                                        <div class="row d-flex align-items-center form-group">
+                                                            <div class="col-md-4">
+                                                                <p
+                                                                    class="text-muted font-weight-bold mb-0 over-view-lable">
+                                                                    Name</p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <span class="text-danger">
+                                                                    {{ pricing_form.name.errors|striptags }}
+                                                                </span>
+                                                                {{ pricing_form.name }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="row d-flex align-items-center form-group">
+                                                            <div class="col-md-4">
+                                                                <p
+                                                                    class="text-muted font-weight-bold mb-0 over-view-lable">
+                                                                    Description</p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <span class="text-danger">
+                                                                    {{ pricing_form.description.errors|striptags }}
+                                                                </span>
+                                                                {{ pricing_form.description }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="row d-flex align-items-center form-group">
+                                                            <div class="col-md-4">
+                                                                <p
+                                                                    class="text-muted font-weight-bold mb-0 over-view-lable">
+                                                                    Revisions</p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <span class="text-danger">
+                                                                    {{ pricing_form.revision.errors|striptags }}
+                                                                </span>
+                                                                {{ pricing_form.revision }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="row d-flex align-items-center form-group">
+                                                            <div class="col-md-4">
+                                                                <p
+                                                                    class="text-muted font-weight-bold mb-0 over-view-lable">
+                                                                    Delivery time</p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <span class="text-danger">
+                                                                    {{ pricing_form.delivery_time.errors|striptags }}
+                                                                </span>
+                                                                {{ pricing_form.delivery_time }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="row d-flex align-items-center form-group">
+                                                            <div class="col-md-4">
+                                                                <p
+                                                                    class="text-muted font-weight-bold mb-0 over-view-lable">
+                                                                    Price</p>
+                                                            </div>
+                                                            <div class="col-md-8" id="ttt">
+                                                                <span class="text-danger">
+                                                                    {{ pricing_form.price.errors|striptags}}
+                                                                </span>
+                                                                <div class="row">
+                                                                    <div class="col-11">
+                                                                        {{ pricing_form.price }}
+                                                                    </div>
+                                                                    <span class="text-muted price-icon">
+                                                                        $
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="text-right">
+                                                            <button type="submit" class="btn btn-success">Save</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="tab-pane" id="description">
+                        <section class="py-4">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-8">
+                                        <div class="bg-white rounded shadow-sm sidebar-page-right c">
+                                            <div style="background-color: #f0f2f5;">
+                                                <div class="p-3 border-bottom text-right">
+                                                    <h6 class="mb-0">Briefly describe your gig</h6>
+                                                </div>
+                                                <div class="p-3 border-bottom">
+                                                    <form action="{% url 'gigs:edit_gig' gig_id %}" method="POST"
+                                                        class="design-form" novalidate>
+                                                        {% csrf_token %}
+                                                        <div class="row align-items-center form-group">
+                                                            <div class="col-12 align-items-center">
+                                                                <span class="text-danger">
+                                                                    {{ description_form.description.errors|striptags }}
+                                                                </span>
+                                                                {{ description_form.description }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="text-right">
+                                                            <button type="submit" class="btn btn-success">Save</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="tab-pane" id="media">
+                        <section class="py-4">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-8">
+                                        <div class="bg-white rounded shadow-sm sidebar-page-right c">
+                                            <div style="background-color: #f0f2f5;">
+                                                <div class="p-3 border-bottom">
+                                                    <form action="{% url 'gigs:edit_gig' gig_id %}" method="POST"
+                                                        class="design-form" enctype="multipart/form-data" novalidate>
+                                                        {% csrf_token %}
+                                                        <div class="row d-flex align-items-center form-group">
+                                                            <div class="col-md-4">
+                                                                <p
+                                                                    class="text-muted font-weight-bold mb-0 over-view-lable">
+                                                                    Main image
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <span class="text-danger">
+                                                                    {{ media_form.main_image.errors|striptags }}
+                                                                </span>
+                                                                <div>
+                                                                    {{ media_form.main_image }}
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="row d-flex align-items-center form-group">
+                                                            <div class="col-md-4">
+                                                                <p
+                                                                    class="text-muted font-weight-bold mb-0 over-view-lable">
+                                                                    Image 2</p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <span class="text-danger">
+                                                                    {{ media_form.image2.errors|striptags }}
+                                                                </span>
+                                                                {{ media_form.image2 }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="row d-flex align-items-center form-group">
+                                                            <div class="col-md-4">
+                                                                <p
+                                                                    class="text-muted font-weight-bold mb-0 over-view-lable">
+                                                                    Image3</p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <span class="text-danger">
+                                                                    {{ media_form.image3.errors|striptags }}
+                                                                </span>
+                                                                {{ media_form.image3 }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="row d-flex align-items-center form-group">
+                                                            <div class="col-md-4">
+                                                                <p
+                                                                    class="text-muted font-weight-bold mb-0 over-view-lable">
+                                                                    Add Video</p>
+                                                            </div>
+                                                            <div class="col-md-8" id="ttt">
+                                                                <span class="text-danger">
+                                                                    {{ media_form.video.errors|striptags }}
+                                                                </span>
+                                                                {{ media_form.video }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="text-right">
+                                                            <button type="submit" class="btn btn-success">Save</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block javascript %}
+
+<script>
+
+    window.onload = function () {
+
+        if ('{{active}}' != '') {
+
+            $('#{{active}}').addClass('active')
+            $('#{{active}}-a').addClass('active')
+
+        } else {
+
+            $('#over-view').addClass('active')
+            $('#over-view-a').addClass('active')
+        }
+
+        $('#tags').tagsInput({
+            'maxChars': 20,
+            'defaultText': 'Add a tag',
+            'removeWithBackspace': false,
+        });
+    }
+
+    document.querySelector('.title-text').addEventListener("scroll", heigthChange);
+    function heigthChange() {
+        var e = document.querySelector('.title-text');
+        var height = e.scrollTop;
+        document.querySelector('.before-title').style.top = (0 - height) + "px";
+    }
+
+    CKEDITOR.replace('editor1');
+
+</script>
+{% endblock javascript %}
+
+{% endblock main %}

@@ -1,0 +1,239 @@
+{% extends 'seller_index.html' %}
+{% load static %}
+
+{% block title %} {{ user_profile.user_name }} / orders{% endblock title %}
+
+{% block main %}
+
+<div class="main-page second py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="mb-3">Manage Proposal/Service Orders
+                </h2>
+                <ul class="nav osahan-tabs nav-tabs flex-column flex-sm-row ">
+                    <li class="nav-item">
+                        <a href="#active" data-toggle="tab" class="nav-link make-black active">
+                            ACTIVE <span class="badge badge-success">{{ active_orders|length }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#delivered" data-toggle="tab" class="nav-link make-black">
+                            DELIVERED <span class="badge badge-success">{{ delivered_orders|length }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#completed" data-toggle="tab" class="nav-link make-black">
+                            COMPLETED <span class="badge badge-success">{{ completed_orders|length }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#cancelled" data-toggle="tab" class="nav-link make-black">
+                            CANCELLED <span class="badge badge-success">{{ cancelled_orders|length }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#all" data-toggle="tab" class="nav-link make-black">
+                            ALL <span class="badge badge-success">{{ all_orders|length }}</span>
+                        </a>
+                    </li>
+                </ul>
+
+
+
+                <div class="tab-content osahan-table bg-white rounded shadow-sm px-3 pt-1">
+                    <div class="tab-pane active" id="active">
+                        <div class="table-responsive box-table mt-3">
+
+
+                            <table class="table table-bordered">
+                                <thead>
+
+
+                                    <tr>
+                                        <th>ORDER SUMMARY</th>
+                                        <th>ORDER DATE</th>
+                                        <th>DUE ON</th>
+                                        <th>TOTAL</th>
+                                        <th>STATUS</th>
+                                    </tr>
+                                </thead>
+                                {% if not active_orders %}
+                                <h2>There are no active orders to show.</h2>
+                                {% endif %}
+
+
+                                <tbody>
+                                    {% for i in active_orders %}
+                                    <tr>
+                                        <td>
+                                            <!-- <a href="#" class="make-black"> -->
+                                            <img class="order-proposal-image" src="images/senatopcustudio.jpg">
+                                            <p class="order-proposal-title">{{ i.order_summary }}</p>
+                                            <!-- </a> -->
+                                        </td>
+
+                                        <td>{{ i.order_date }}</td>
+                                        <td>{{ i.due_date }}</td>
+                                        <td>{{ i.price }}</td>
+                                        <td><button class="btn btn-sm btn-success">{{i.status}}</button></td>
+                                    </tr>
+
+                                    {% endfor %}
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="delivered">
+                        <div class="table-responsive box-table mt-3">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>ORDER SUMMARY</th>
+                                        <th>ORDER DATE</th>
+                                        <th>DUE ON</th>
+                                        <th>TOTAL</th>
+                                        <th>STATUS</th>
+                                    </tr>
+                                </thead>
+                                {% if not delivered_orders %}
+                                <h3>There are no delivered orders to show.</h3>
+                                {% endif %}
+                                <tbody>
+                                    {% for i in delivered_orders %}
+                                    <tr>
+                                        <td>
+                                            <a href="#">
+                                                <img class="order-proposal-image" src="images/senatopcustudio.jpg">
+                                                <p class="order-proposal-title">{{ i.order_summary }}</p>
+                                            </a>
+                                        </td>
+                                        <td>{{ i.order_date }}</td>
+                                        <td>{{ i.due_date }}</td>
+                                        <td>{{ i.price }}</td>
+                                        <td><button class="btn btn-sm btn-success">{{i.status}}</button></td>
+                                    </tr>
+                                    {% endfor %}
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="completed">
+                        <div class="table-responsive box-table mt-3">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>ORDER SUMMARY</th>
+                                        <th>ORDER DATE</th>
+                                        <th>DUE ON</th>
+                                        <th>TOTAL</th>
+                                        <th>STATUS</th>
+                                    </tr>
+                                </thead>
+                                {% if not completed_orders %}
+                                <h4>There are no completed orders to show.</h4>
+                                {% endif %}
+                                <tbody>
+                                    {% for i in completed_orders %}
+                                    <tr>
+                                        <td>
+                                            <a href="#">
+                                                <img class="order-proposal-image" src="images/designerheather.jpg">
+                                                <p class="order-proposal-title">{{ i.order_summary }}</p>
+                                            </a>
+                                        </td>
+                                        <td>{{ i.order_date }}</td>
+                                        <td>{{ i.due_date }}</td>
+                                        <td>{{ i.price }}</td>
+                                        <td><button class="btn btn-sm btn-success">{{i.status}}</button></td>
+                                    </tr>
+
+                                    {% endfor %}
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="cancelled">
+                        <div class="table-responsive box-table mt-3">
+
+
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>ORDER SUMMARY</th>
+                                        <th>ORDER DATE</th>
+                                        <th>DUE ON</th>
+                                        <th>TOTAL</th>
+                                        <th>STATUS</th>
+                                    </tr>
+                                </thead>
+                                {% if not cancelled_orders %}
+                                <h5>There are no cancelled orders to show.</h5>
+                                {% endif %}
+                                <tbody>
+                                    {% for i in cancelled_orders %}
+                                    <tr>
+                                        <td>
+                                            <a href="#">
+                                                <img class="order-proposal-image" src="images/designerheather.jpg">
+                                                <p class="order-proposal-title">{{i.order_summary}}</p>
+                                            </a>
+                                        </td>
+                                        <td>{{i.order_date}}</td>
+                                        <td>{{i.due_date}}</td>
+                                        <td>{{i.price}}</td>
+                                        <td><button class="btn btn-sm btn-success">{{i.status}}</button></td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="all">
+                        <div class="table-responsive box-table mt-3">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>ORDER SUMMARY</th>
+                                        <th>ORDER DATE</th>
+                                        <th>DUE ON</th>
+                                        <th>TOTAL</th>
+                                        <th>STATUS</th>
+                                    </tr>
+                                </thead>
+                                {% if not all_orders %}
+                                <h6>There are no orders to show.</h6>
+                                {% endif %}
+                                <tbody>
+                                    {% for i in all_orders %}
+                                    <tr>
+                                        <td>
+                                            <a href="#" class="make-black">
+                                                <img class="order-proposal-image " src="images/digitalgeria.jpg">
+                                                <p class="order-proposal-title">{{i.order_summary}}</p>
+                                            </a>
+                                        </td>
+                                        <td>{{i.order_date}}</td>
+                                        <td>{{i.due_date}}</td>
+                                        <td>{{i.price}}</td>
+                                        <td><button class="btn btn-sm btn-success">{{i.status}}</button></td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock main %}

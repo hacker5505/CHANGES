@@ -1,0 +1,86 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}register{% endblock title %}
+
+{% block main %}
+<!-- Register -->
+<div class="bg-white">
+    <div class="container">
+        <div class="row justify-content-center align-items-center d-flex vh-100">
+            <div class="col-lg-4 mx-auto">
+                <div class="osahan-login py-4">
+                    <div class="text-center mb-4">
+                        <a href="index.html"><img src="images/fav.svg" alt=""></a>
+                        <h5 class="font-weight-bold mt-3">Unete a Tuasella</h5>
+                        <p class="text-muted">Dejanos tus preocupaciones en nuestras manos</p>
+                    </div>
+
+                    {% for error in signup_form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                    {% endfor %}
+
+                    <form action="{% url 'users:signup' %}" method="POST" class="design-form" novalidate>
+                        {% csrf_token %}
+
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="mb-1">Usuario</label>
+                                    <span class="text-danger">*</span>
+                                    <span class="text-danger">{{ user_name_form.user_name.errors|striptags }}</span>
+                                    <div class="position-relative icon-form-control">
+                                        <i class="mdi mdi-account position-absolute"></i>
+                                        {{ user_name_form.user_name }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="mb-1">Correo</label>
+                            <span class="text-danger">*</span>
+                            <span class="text-danger">{{ signup_form.email.errors|striptags }}</span>
+                            <div class="position-relative icon-form-control">
+                                <i class="mdi mdi-email-outline position-absolute"></i>
+                                {{ signup_form.email }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="mb-1">Contraseña</label>
+                            <span class="text-danger">*</span>
+                            <span class="text-danger">{{ signup_form.password1.errors|striptags }}</span>
+                            <div class="position-relative icon-form-control">
+                                <i class="mdi mdi-key-variant position-absolute"></i>
+                                {{ signup_form.password1 }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="mb-1">Confirma tu Contraseña</label>
+                            <span class="text-danger">*</span>
+                            <span class="text-danger">{{ signup_form.password2.errors|striptags }}</span>
+                            <div class="position-relative icon-form-control">
+                                <i class="mdi mdi-key-variant position-absolute"></i>
+                                {{ signup_form.password2 }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="mb-1">Estas de acuerdo con el  <a href="#">Acuerdo de Usuario</a>, <a
+                                    href="#">Política de Privacidad</a>, y <a href="#">La política de cookies</a>.</label>
+                        </div>
+                        <button class="btn btn-success btn-block text-uppercase" type="submit"> De acuerdo & Unete
+                        </button>
+                        <div class="py-3 d-flex align-item-center">
+                            <a href="{% url 'password_reset' %}">¿Olvidaste tu contraseña?</a>
+                            <span class="ml-auto"> ¿Ya eres parte de Tuasella? <a href="{% url 'users:login' %}">Unete
+                                    </a></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Register -->
+{% endblock main %}

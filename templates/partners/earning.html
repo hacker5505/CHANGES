@@ -1,0 +1,126 @@
+{% extends 'seller_index.html' %}
+{% load static %}
+
+{% block title %} {{ user_profile.user_name }} / earnings{% endblock title %}
+
+{% block main %}
+
+<div class="main-page second py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <h2 class="pull-left m-0 p-0">Revenue Earned</h2>
+                <p class="pull-right mb-0 mt-1 p-0">
+                    Available For Withdrawal: <span class="font-weight-bold text-success"> $5.00 </span>
+                </p>
+            </div>
+            <div class="col-md-12">
+                <div class="mb-3 border-0 bg-white shadow-sm rounded ">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 text-center border-box">
+                                <p> Withdrawals </p>
+                                <h1 class="font-weight-bold m-0">$12,000</h1>
+                            </div>
+                            <div class="col-md-3 text-center border-box">
+                                <p> Used To Order Proposals/Services </p>
+                                <h1 class="font-weight-bold m-0">$1,00.50</h1>
+                            </div>
+                            <div class="col-md-3 text-center border-box">
+                                <p> Pending Clearance </p>
+                                <h1 class="font-weight-bold m-0">$-1015.00</h1>
+                            </div>
+                            <div class="col-md-3 text-center border-box">
+                                <p> Available Income </p>
+                                <h1 class="font-weight-bold m-0">$5.00</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="pull-left my-2 mr-2"> Withdraw To: </p>
+                <button class="btn btn-success ml-2">
+                    <i class="fa fa-paypal"></i> Paypal Account
+                </button>
+                <button class="btn btn-outline-success ml-2">
+                    <i class="fa fa-university"></i> Bank Account
+                </button>
+                <button class="btn btn-outline-success ml-2">
+                    <i class="fa fa-credit-card"></i> Moneygram
+                </button>
+                <button class="btn btn-outline-success ml-2">
+                    <i class="fa fa-bitcoin"></i> Bitcoin Wallet
+                </button>
+                <div class="table-responsive box-table mt-4 bg-white rounded shadow-sm p-2">
+                    <table class="table table-bordered m-0">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>For</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>March 02, 2021</td>
+                                <td>
+                                    Order Revenue (<a href="#" target="blank" class="text-success"> View Order </a>)
+                                </td>
+                                <td class="text-success"> +$23.75 </td>
+                            </tr>
+                            <tr>
+                                <td>February 16, 2021</td>
+                                <td>
+                                    Order Tip Revenue (<a href="#" target="blank" class="text-success"> View Order
+                                    </a>)
+                                </td>
+                                <td class="text-success"> +$4.00 </td>
+                            </tr>
+                            <tr>
+                                <td>February 16, 2021</td>
+                                <td>
+                                    Order Revenue (<a href="#" target="blank" class="text-success"> View Order </a>)
+                                </td>
+                                <td class="text-success"> +$11.40 </td>
+                            </tr>
+                            <tr>
+                                <td>February 04, 2021</td>
+                                <td>
+                                    Order Revenue (<a href="#" target="blank" class="text-success"> View Order </a>)
+                                </td>
+                                <td class="text-success"> +$9.50 </td>
+                            </tr>
+                            <tr>
+                                <td>January 31, 2021</td>
+                                <td>
+                                    Order Revenue (<a href="#" target="blank" class="text-success"> View Order </a>)
+                                </td>
+                                <td class="text-success"> +$38.00 </td>
+                            </tr>
+                            <tr>
+                                <td>January 23, 2021</td>
+                                <td>
+                                    Order Revenue (<a href="#" target="blank" class="text-success"> View Order </a>)
+                                </td>
+                                <td class="text-success"> +$47.50 </td>
+                            </tr>
+                            <tr>
+                                <td>January 22, 2021</td>
+                                <td>
+                                    Order Tip Revenue (<a href="#" target="blank" class="text-success"> View Order
+                                    </a>)
+                                </td>
+                                <td class="text-success"> +$5.00 </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock main %}
